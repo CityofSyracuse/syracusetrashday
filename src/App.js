@@ -23,6 +23,8 @@ function MyComponent() {
     <div>
       <h1>This is the final version</h1>
       {JSON.stringify(data.features.attributes.StName)}
+
+      <div></div>
       {/* {data ? JSON.stringify(data.features.attributes.StName) : "Loading..."} */}
     </div>
   );
