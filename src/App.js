@@ -21,7 +21,7 @@ function MyComponent() {
 
   return (
     <div>
-      <h1>FINAL VERSION</h1>
+      <h1>This is the final version</h1>
       {JSON.stringify(data.features.attributes.StName)}
       {/* {data ? JSON.stringify(data.features.attributes.StName) : "Loading..."} */}
     </div>
