@@ -1,0 +1,38 @@
+.searchInput{
+    text-align: center;
+    border: 3px solid rgb(241, 238, 9);
+    margin-bottom: 75px;
+    width: 400px;
+}
+.title{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: x-large;
+}
+
+.navbar{
+    background-color: navy;
+}
+
+
+.container{
+    height: 200px;
+  width: 50%;
+  background-color: powderblue;
+}
+
+body {
+    background-color: navy;
+    color: white;
+    padding: 40px;
+    font-family: Sans-Serif;
+    text-align: center;
+  }
+
+
+  .custom-table {
+    
+    font-family: 'Times New Roman', Times, serif;
+}
+.table-variants{
+   background-color: red;   
+}
