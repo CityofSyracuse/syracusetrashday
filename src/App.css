@@ -1,16 +1,19 @@
 .searchInput{
+    font-family: 'Times New Roman', Times, serif;
     text-align: center;
-    border: 3px solid rgb(241, 238, 9);
+    border: 3px solid  #FADB69;
     margin-bottom: 75px;
     width: 400px;
 }
 .title{
     font-family: 'Times New Roman', Times, serif;
     font-size: x-large;
+    font-weight: bold;
 }
 
 .navbar{
     background-color: navy;
+
 }
 
 
@@ -27,12 +30,21 @@ body {
     font-family: Sans-Serif;
     text-align: center;
   }
-
-
   .custom-table {
     
     font-family: 'Times New Roman', Times, serif;
 }
 .table-variants{
-   background-color: red;   
+   background-color: black;   
+}
+
+.Description {
+    padding-inline: 20%
+
+    ;
+    font-family: 'Times New Roman', Times, serif;
+   
+}
+.answer{
+    font-family: 'Times New Roman', Times, serif;
 }

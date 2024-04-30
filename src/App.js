@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
+//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//import {} from "";
 
 function TrashDaySearch() {
   const [data, setData] = useState(null);
@@ -49,7 +51,7 @@ function TrashDaySearch() {
           className="syracuseLogowhite.png"
           src="SyracuseLogowhite.png"
           alt="Logo"
-          width="225"
+          width="100"
           padding-left="25"
           padding-right="0px"
         ></img>
@@ -60,8 +62,11 @@ function TrashDaySearch() {
           <li className="nav-item"></li>
         </ul>
       </nav>
-      <div className="title">Find Property Trash Day Schedule</div>
-      <body />
+      <h1 className="title">Property Trash Day Schedule</h1>
+      <body className="Description">
+        Simply input your ZIP code or address into the search bar below to
+        receive customized details relevant to your location.
+      </body>
       <div classname="container">
         <input
           className="searchInput"
@@ -79,8 +84,8 @@ function TrashDaySearch() {
               <tr>
                 <th scope="col">House Number</th>
                 <th scope="col">Street Name</th>
-                <th scope="col">TrashDay</th>
-                <th scope="col">ZipCode</th>
+                <th scope="col">Trash Day</th>
+                <th scope="col">Zip Code</th>
                 <th scope="col">Full Address</th>
               </tr>
             </thead>
@@ -97,7 +102,7 @@ function TrashDaySearch() {
             </tbody>
           </table>
         ) : (
-          <p>no results found.</p>
+          <p className="answer">No results found.</p>
         )}
       </div>
     </div>
