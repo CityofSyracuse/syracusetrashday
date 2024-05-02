@@ -66,6 +66,11 @@ function TrashDaySearch() {
       <body className="Description">
         Simply input your ZIP code or address into the search bar below to
         receive customized details relevant to your location.
+        <p className="info">
+          *Potential disclaimer: If your specific address does not appear in
+          search results, kindly search for your street name to locate the
+          nearest address or refer to the provided map above.*
+        </p>
       </body>
       <div classname="container">
         <input
@@ -86,7 +91,7 @@ function TrashDaySearch() {
                 <th scope="col">Street Name</th>
                 <th scope="col">Trash Day</th>
                 <th scope="col">Zip Code</th>
-                <th scope="col">Full Address</th>
+                {/* <th scope="col">Full Address</th> */}
               </tr>
             </thead>
             <tbody>
@@ -96,7 +101,7 @@ function TrashDaySearch() {
                   <td>{feature.attributes.StName}</td>
                   <td>{feature.attributes.TrashDay}</td>
                   <td>{feature.attributes.Zip}</td>
-                  <td>{feature.attributes.FullAddress}</td>
+                  {/* <td>{feature.attributes.FullAddress}</td> */}
                 </tr>
               ))}
             </tbody>
