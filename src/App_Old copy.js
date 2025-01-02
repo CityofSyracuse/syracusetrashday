@@ -5,52 +5,29 @@ import "./App.css";
 //import {} from "";
 
 function TrashDaySearch() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  //const [ZipCode, setZipcode]=useState("");
 
   useEffect(() => {
-    async function fetchAllData() {
-      const baseUrl = "https://services6.arcgis.com/bdPqSfflsdgFRVVM/arcgis/rest/services/Trash_Day_Schedule/FeatureServer/2/query";
-      const params = {
-        where: "1=1",
-        outFields: "FullAddress,Zip,TrashDay",
-        outSR: "4326",
-        f: "json",
-        resultRecordCount: 2000, // API limit
-      };
-
-      let allFeatures = [];
-      let resultOffset = 0;
-
+    async function fetchData() {
       try {
-        while (true) {
-          const response = await axios.get(baseUrl, {
-            params: { ...params, resultOffset },
-          });
-
-          const features = response.data.features || [];
-          allFeatures = [...allFeatures, ...features];
-
-          // Break loop if fewer than 2000 records are returned
-          if (features.length < 2000) break;
-
-          resultOffset += 2000; // Increment offset for the next batch
-          console.log("Offset is: " + resultOffset)
-        }
-
-        setData(allFeatures);
+        const response = await axios.get(
+          "https://services6.arcgis.com/bdPqSfflsdgFRVVM/arcgis/rest/services/Trash_Day_Schedule/FeatureServer/2/query?where=1%3D1&outFields=StNum,StName,FullAddress,Zip,TrashDay&outSR=4326&f=json"
+        );
+        setData(response.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("There was an error fetching the data:", error);
       }
     }
 
-    fetchAllData();
+    fetchData();
   }, []);
 
-  const filterData = data.length
-    ? data.filter((feature) => {
-        if (!feature.attributes?.FullAddress) return false;
-        const address = feature.attributes.FullAddress.toLowerCase();
+  const filterData = data
+    ? data.features.filter((feature) => {
+        if (!feature.attributes?.StName) return false;
+        const address = feature.attributes.StName.toLowerCase();
         const date = feature.attributes?.TrashDay
           ? feature.attributes?.TrashDay.toLowerCase()
           : "";
@@ -110,19 +87,21 @@ function TrashDaySearch() {
           >
             <thead className="custom-table2 table-warning table-border-solid">
               <tr>
-                <th scope="col">Full Address</th>
+                <th scope="col">House Number</th>
+                <th scope="col">Street Name</th>
                 <th scope="col">Trash Day</th>
                 <th scope="col">Zip Code</th>
-
+                {/* <th scope="col">Full Address</th> */}
               </tr>
             </thead>
             <tbody>
               {filterData.map((feature) => (
                 <tr key={feature.attributes.OBJECTID}>
-                  <td>{feature.attributes.FullAddress}</td>
+                  <td>{feature.attributes.StNum}</td>
+                  <td>{feature.attributes.StName}</td>
                   <td>{feature.attributes.TrashDay}</td>
                   <td>{feature.attributes.Zip}</td>
-
+                  {/* <td>{feature.attributes.FullAddress}</td> */}
                 </tr>
               ))}
             </tbody>
