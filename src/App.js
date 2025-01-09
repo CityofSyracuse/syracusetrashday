@@ -13,7 +13,7 @@ function TrashDaySearch() {
       const baseUrl = "https://services6.arcgis.com/bdPqSfflsdgFRVVM/ArcGIS/rest/services/Trash_Pickup_Day_Schedule_2025/FeatureServer/0/query";
       const params = {
         where: "1=1",
-        outFields: "FullAddress,Zip,CollectionDay,RecyclingWeek",
+        outFields: "FullAddres,Zip,Sanitation,RecyclingW",
         outSR: "4326",
         f: "json",
         resultRecordCount: 2000, // API limit
@@ -49,10 +49,10 @@ function TrashDaySearch() {
 
   const filterData = data.length
     ? data.filter((feature) => {
-        if (!feature.attributes?.FullAddress) return false;
-        const address = feature.attributes.FullAddress.toLowerCase();
-        const date = feature.attributes?.CollectionDay
-          ? feature.attributes?.CollectionDay.toLowerCase()
+        if (!feature.attributes?.FullAddres) return false;
+        const address = feature.attributes.FullAddres.toLowerCase();
+        const date = feature.attributes?.Sanitation
+          ? feature.attributes?.Sanitation.toLowerCase()
           : "";
 
         const zip = feature.attributes?.Zip
@@ -115,9 +115,9 @@ function TrashDaySearch() {
             <tbody>
               {filterData.map((feature) => (
                 <tr key={feature.attributes.OBJECTID}>
-                  <td>{feature.attributes.FullAddress}</td>
-                  <td>{feature.attributes.CollectionDay}</td>
-                  <td>{feature.attributes.RecyclingWeek}</td>
+                  <td>{feature.attributes.FullAddres}</td>
+                  <td>{feature.attributes.Sanitation}</td>
+                  <td>{feature.attributes.RecyclingW}</td>
                   <td>{feature.attributes.Zip}</td>
                 </tr>
               ))}
