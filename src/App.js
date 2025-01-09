@@ -10,10 +10,10 @@ function TrashDaySearch() {
 
   useEffect(() => {
     async function fetchAllData() {
-      const baseUrl = "https://services6.arcgis.com/bdPqSfflsdgFRVVM/arcgis/rest/services/Trash_Day_Schedule/FeatureServer/2/query";
+      const baseUrl = "https://services6.arcgis.com/bdPqSfflsdgFRVVM/ArcGIS/rest/services/Trash_Pickup_Day_Schedule_2025/FeatureServer/0/query";
       const params = {
         where: "1=1",
-        outFields: "FullAddress,Zip,TrashDay",
+        outFields: "FullAddress,Zip,CollectionDay,RecyclingWeek",
         outSR: "4326",
         f: "json",
         resultRecordCount: 2000, // API limit
@@ -51,8 +51,8 @@ function TrashDaySearch() {
     ? data.filter((feature) => {
         if (!feature.attributes?.FullAddress) return false;
         const address = feature.attributes.FullAddress.toLowerCase();
-        const date = feature.attributes?.TrashDay
-          ? feature.attributes?.TrashDay.toLowerCase()
+        const date = feature.attributes?.CollectionDay
+          ? feature.attributes?.CollectionDay.toLowerCase()
           : "";
 
         const zip = feature.attributes?.Zip
@@ -86,16 +86,11 @@ function TrashDaySearch() {
         </ul>
       </nav>
       <h1 className="title">Property Trash Day Schedule</h1>
-      <body className="Description">
+      <p className="Description">
         Simply input your ZIP code or address into the search bar below to
         receive customized details relevant to your location.
-        <p className="info">
-          *Potential disclaimer: If your specific address does not appear in
-          search results, kindly search for your street name to locate the
-          nearest address or refer to the provided map above.*
         </p>
-      </body>
-      <div classname="container">
+      <div className="container">
         <input
           className="searchInput"
           type="text"
@@ -111,7 +106,8 @@ function TrashDaySearch() {
             <thead className="custom-table2 table-warning table-border-solid">
               <tr>
                 <th scope="col">Full Address</th>
-                <th scope="col">Trash Day</th>
+                <th scope="col">Collection Day</th>
+                <th scope="col">Recycling Week</th>
                 <th scope="col">Zip Code</th>
 
               </tr>
@@ -120,9 +116,9 @@ function TrashDaySearch() {
               {filterData.map((feature) => (
                 <tr key={feature.attributes.OBJECTID}>
                   <td>{feature.attributes.FullAddress}</td>
-                  <td>{feature.attributes.TrashDay}</td>
+                  <td>{feature.attributes.CollectionDay}</td>
+                  <td>{feature.attributes.RecyclingWeek}</td>
                   <td>{feature.attributes.Zip}</td>
-
                 </tr>
               ))}
             </tbody>
