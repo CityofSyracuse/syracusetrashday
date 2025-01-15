@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"; //
 import axios from "axios";
 import "./App.css";
 //import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +10,8 @@ function TrashDaySearch() {
 
   useEffect(() => {
     async function fetchAllData() {
-      const baseUrl = "https://services6.arcgis.com/bdPqSfflsdgFRVVM/arcgis/rest/services/Trash_Day_Schedule/FeatureServer/2/query";
+      const baseUrl =
+        "https://services6.arcgis.com/bdPqSfflsdgFRVVM/arcgis/rest/services/Trash_Day_Schedule/FeatureServer/2/query";
       const params = {
         where: "1=1",
         outFields: "FullAddress,Zip,TrashDay",
@@ -35,7 +36,7 @@ function TrashDaySearch() {
           if (features.length < 2000) break;
 
           resultOffset += 2000; // Increment offset for the next batch
-          console.log("Offset is: " + resultOffset)
+          console.log("Offset is: " + resultOffset);
         }
 
         setData(allFeatures);
@@ -60,9 +61,11 @@ function TrashDaySearch() {
           : "";
 
         return (
+          //Adding in stname here w/jason**
           address.includes(searchTerm.toLowerCase()) ||
           date.includes(searchTerm.toLowerCase()) ||
-          zip.includes(searchTerm)
+          zip.includes(searchTerm) //|| This where you left
+          //StName.includes(searchTerm)
         );
       })
     : [];
@@ -113,7 +116,6 @@ function TrashDaySearch() {
                 <th scope="col">Full Address</th>
                 <th scope="col">Trash Day</th>
                 <th scope="col">Zip Code</th>
-
               </tr>
             </thead>
             <tbody>
@@ -122,7 +124,6 @@ function TrashDaySearch() {
                   <td>{feature.attributes.FullAddress}</td>
                   <td>{feature.attributes.TrashDay}</td>
                   <td>{feature.attributes.Zip}</td>
-
                 </tr>
               ))}
             </tbody>
