@@ -131,5 +131,15 @@ function TrashDaySearch() {
   );
 }
 
+  function updateRecyclingWeek() {
+    const today = new Date();
+    const referenceDate = new Date('2024-10-14'); // Start of the first A week
+    const daysDifference = Math.floor((today - referenceDate) / (1000 * 60 * 60 * 24));
+    const weeksDifference = Math.floor(daysDifference / 7);    // Check if weeksDifference is even or odd to alternate between A and B
+    const isAWeek = weeksDifference % 2 === 0;
+    document.getElementById('recycling-week-letter').textContent = isAWeek ? 'A' : 'B';
+    document.getElementById('current-date').textContent = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric' }).toUpperCase();
+  }  window.onload = updateRecyclingWeek;
+
 export default TrashDaySearch;
 //className="table-bordered table-hover table table-bordered table-hover table-warning"
