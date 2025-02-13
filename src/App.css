@@ -1,52 +1,56 @@
-.searchInput{
-    font-family: 'Times New Roman', Times, serif;
+.searchInput {
+    font-family: 'Rubik', sans-serif;
     text-align: center;
-    border: 3px solid  #FADB69;
+    border: 3px solid #FADB69;
     margin-bottom: 75px;
     width: 400px;
 }
-.title{
-    font-family: 'Times New Roman', Times, serif;
+
+.title {
+    font-family: 'Rubik', sans-serif;
     font-size: x-large;
     font-weight: bold;
 }
 
-.navbar{
+.navbar {
     background-color: navy;
 
 }
 
 
-.container{
+.container {
     height: 200px;
-  width: 50%;
-  background-color: powderblue;
+    width: 50%;
+    background-color: navy;
 }
 
 body {
     background-color: navy;
     color: white;
     padding: 40px;
-    font-family: Sans-Serif;
+    font-family: 'Rubik', Sans-Serif;
     text-align: center;
-  }
-  .custom-table {
-    
-    font-family: 'Times New Roman', Times, serif;
 }
-.table-variants{
-   background-color: black;   
+
+.custom-table {
+
+    font-family: 'Rubik', sans-serif;
+
+}
+
+.table-variants {
+    background-color: black;
 }
 
 .Description {
-    padding-inline: 20%
+    padding-inline: 20%;
+    font-family: 'Rubik', sans-serif;
 
-    ;
-    font-family: 'Times New Roman', Times, serif;
-   
 }
-.answer{
-    font-family: 'Times New Roman', Times, serif;
+
+.answer {
+    font-family: 'Rubik', sans-serif;
+
 }
 
 /* .info{
