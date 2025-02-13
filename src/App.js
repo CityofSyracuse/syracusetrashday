@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react"; //
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
-//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import {} from "";
 
 function TrashDaySearch() {
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
+  const baseUrl =
+    "https://services6.arcgis.com/bdPqSfflsdgFRVVM/ArcGIS/rest/services/Trash_Pickup_Day_Schedule_2025/FeatureServer/0/query";
+
   useEffect(() => {
-    async function fetchAllData() {
-      const baseUrl = ""(
-        "https://services6.arcgis.com/bdPqSfflsdgFRVVM/ArcGIS/rest/services/Trash_Pickup_Day_Schedule_2025/FeatureServer/0/query"
-      );
+    const fetchAllData = async () => {
+      let allFeatures = [];
+      let resultOffset = 0;
       const params = {
         where: `StName LIKE '${searchTerm}%'`,
         outFields: "FullAddres,Zip,Sanitation,RecyclingW",
@@ -21,30 +21,24 @@ function TrashDaySearch() {
         resultRecordCount: 2000, // API limit
       };
 
-      let allFeatures = [];
-      let resultOffset = 0;
-
       try {
-        // while (true) {
-        const response = await axios.get(baseUrl, {
-          params: { ...params, resultOffset },
-        });
+        while (true) {
+          const response = await axios.get(baseUrl, {
+            params: { ...params, resultOffset },
+          });
 
-        const features = response.data.features || [];
-        allFeatures = [...allFeatures, ...features];
+          const features = response.data.features || [];
+          allFeatures = [...allFeatures, ...features];
 
-        // Break loop if fewer than 2000 records are returned
-        // if (features.length < 2000) break;
-
-        //     resultOffset += 2000; // Increment offset for the next batch
-        //     console.log("Offset is: " + resultOffset);
-        //
+          if (features.length < 2000) break;
+          resultOffset += 2000; // Increment offset for the next batch
+        }
 
         setData(allFeatures);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
-    }
+    };
 
     fetchAllData();
   }, [searchTerm]);
@@ -63,36 +57,31 @@ function TrashDaySearch() {
           : "";
 
         return (
-          //Adding in stname here w/jason**
-
           address.includes(searchTerm.toLowerCase()) ||
           date.includes(searchTerm.toLowerCase()) ||
-          zip.includes(searchTerm) //|| This where you left
-          //StName.includes(searchTerm)
+          zip.includes(searchTerm)
         );
       })
     : [];
 
   return (
     <div className="container.max-width">
-      {
-        <nav className="navbar">
-          <img
-            className="syracuseLogowhite.png"
-            src="SyracuseLogowhite.png"
-            alt="Logo"
-            width="100"
-            padding-left="25"
-            padding-right="0px"
-          ></img>
-          <ul className=" nav justify-content-end">
-            <li className="nav-item"></li>
-            <li className="nav-item"></li>
-            <li className="nav-item"></li>
-            <li className="nav-item"></li>
-          </ul>
-        </nav>
-      }
+      <nav className="navbar">
+        <img
+          className="syracuseLogowhite.png"
+          src="SyracuseLogowhite.png"
+          alt="Logo"
+          width="100"
+          padding-left="25"
+          padding-right="0px"
+        ></img>
+        <ul className="nav justify-content-end">
+          <li className="nav-item"></li>
+          <li className="nav-item"></li>
+          <li className="nav-item"></li>
+          <li className="nav-item"></li>
+        </ul>
+      </nav>
       <h1 className="title">Property Trash Day Schedule</h1>
       <p className="Description">
         Simply input your ZIP code or address into the search bar below to
@@ -107,10 +96,7 @@ function TrashDaySearch() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         {filterData.length > 0 && searchTerm ? (
-          <table
-            className="custom-table 
-           table table-bordered table-hover --bs-table-accent-bg"
-          >
+          <table className="custom-table table table-bordered table-hover --bs-table-accent-bg">
             <thead className="custom-table2 table-warning table-border-solid">
               <tr>
                 <th scope="col">Full Address</th>
@@ -139,4 +125,3 @@ function TrashDaySearch() {
 }
 
 export default TrashDaySearch;
-//className="table-bordered table-hover table table-bordered table-hover table-warning"
